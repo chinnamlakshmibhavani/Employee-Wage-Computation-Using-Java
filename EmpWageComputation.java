@@ -2,25 +2,13 @@ class EmpWageComputation
 {
   public static final int IS_PART_TIME = 1;
   public static final int IS_FULL_TIME = 2;
-  public static final int empRatePerHr = 20;
-  public static final int NUM_OF_WORKING_DAYS=20;
-  public static final int MAX_HOURS_IN_MONTH=100; 
+  public static int computeEmpWage(String company,int empRatePerHr,int numOfWorkingDays,int maxHoursPerMonth) 
+  {
   int empHrs = 0;
-  int empWage=0;
-  int totalEmpWage=0;
-  int totalWorkingHrs = 0;
+  int totalEmpHrs = 0;
   int totalWorkingDays=0;
 
-  public void wageComputation()
-  {
-     empWage=empHrs*empRatePerHr;
-     totalEmpWage+=empWage;
-     totalWorkingHrs+=empHrs;
-     System.out.println("Employee's day " + totalWorkingDays + " Wage is: " +empWage);
-  }
-  public void computation()
-  {
-     while(totalWorkingDays<NUM_OF_WORKING_DAYS && totalWorkingHrs<MAX_HOURS_IN_MONTH)
+  while(totalEmpHrs<=maxHoursPerMonth && totalWorkingDays<numOfWorkingDays)
      {
         totalWorkingDays++;
         int empCheck = (int) Math.floor(Math.random() * 10) % 3;
@@ -38,14 +26,16 @@ class EmpWageComputation
                       System.out.println("Employee is absent");
 		      empHrs = 0;
 	   }
-        wageComputation();
-      }   
-     System.out.println("Total working hours in month:"+totalWorkingHrs);
-     System.out.println("Total monthly wages is:"+totalEmpWage);
-  }
-     
-  public static void main(String args[]){
-        EmpWageComputation obj=new EmpWageComputation();
-        obj.computation();
+           totalEmpHrs+=empHrs;
+           System.out.println("Day: " + totalWorkingDays + " Emp Hr: " +empHrs);
+          }
+         int totalEmpWage=totalEmpHrs*empRatePerHr;
+         System.out.println("Total employee wage for company: " +company+" is: "+totalEmpWage);
+         return totalEmpWage;
+       }
+       public static void main(String args[]){
+        computeEmpWage("DMart",20,2,10);
+        computeEmpWage("Reliance",10,4,20);
+      
     }
  }
